@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Routes configuration.
  *
@@ -24,6 +25,7 @@
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
 
+
 return static function (RouteBuilder $routes) {
     /*
      * The default class to use for all routes
@@ -42,7 +44,12 @@ return static function (RouteBuilder $routes) {
      * inconsistently cased URLs when used with `{plugin}`, `{controller}` and
      * `{action}` markers.
      */
+
+
+
     $routes->setRouteClass(DashedRoute::class);
+
+
 
     $routes->scope('/', function (RouteBuilder $builder) {
         /*
@@ -50,12 +57,18 @@ return static function (RouteBuilder $routes) {
          * its action called 'display', and we pass a param to select the view file
          * to use (in this case, templates/Pages/home.php)...
          */
-        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+        // $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+        $builder->connect('/', ['controller' => 'Pessoas', 'action' => 'index']);
+
+        $builder->connect('/pessoas', ['controller' => 'Pessoas', 'action' => 'index', '_method' => 'GET']);
+        $builder->connect('/pessoas/add', ['controller' => 'Pessoas', 'action' => 'add', '_method' => 'POST']);
+        $builder->connect('/pessoas/:id', ['controller' => 'Pessoas', 'action' => 'delete', '_method' => 'DELETE'], ['id' => '\d+', 'pass' => ['id']]);
 
         /*
          * ...and connect the rest of 'Pages' controller's URLs.
          */
         $builder->connect('/pages/*', 'Pages::display');
+
 
         /*
          * Connect catchall routes for all controllers.

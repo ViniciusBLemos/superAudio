@@ -100,7 +100,6 @@
 		</div>
 
 		<input type="submit" value="Cadastrar">
-        <a href="list.html">Ir para página de listagem</a>
 	</form>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/scripts.js"></script>

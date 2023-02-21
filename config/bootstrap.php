@@ -45,6 +45,8 @@ use Cake\Mailer\Mailer;
 use Cake\Mailer\TransportFactory;
 use Cake\Routing\Router;
 use Cake\Utility\Security;
+use App\Middleware\JsonMiddleware;
+use Cake\Http\MiddlewareQueue;
 
 /*
  * See https://github.com/josegonzalez/php-dotenv for API details.
@@ -76,6 +78,18 @@ use Cake\Utility\Security;
  * idea to create multiple configuration files, and separate the configuration
  * that changes from configuration that does not. This makes deployment simpler.
  */
+// Cria a fila de middleware padrão
+$middlewareQueue = new MiddlewareQueue();
+
+// Adiciona o middleware JSON à fila
+$middlewareQueue->add(new JsonMiddleware());
+Configure::write('App.middleware', [
+    'json' => [
+        'callable' => 'App\Middleware\JsonMiddleware::process',
+        'priority' => 90
+    ]
+]);
+
 try {
     Configure::config('default', new PhpConfig());
     Configure::load('app', 'default', false);
@@ -95,6 +109,7 @@ if (file_exists(CONFIG . 'app_local.php')) {
  * When debug = true the metadata cache should only last
  * for a short time.
  */
+
 if (Configure::read('debug')) {
     Configure::write('Cache._cake_model_.duration', '+2 minutes');
     Configure::write('Cache._cake_core_.duration', '+2 minutes');
@@ -227,3 +242,5 @@ header('Access-Control-Allow-Headers:');
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
 }
+
+

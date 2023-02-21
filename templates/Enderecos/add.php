@@ -31,4 +31,25 @@
             <?= $this->Form->end() ?>
         </div>
     </div>
+    <script>
+    const form = document.querySelector('#endereco-form');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const url = '<?= $this->Url->build(['action' => 'add']) ?>';
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+
+        })
+        .catch(error => {
+
+        });
+    });
+</script>
 </div>

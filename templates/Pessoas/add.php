@@ -28,4 +28,21 @@
             <?= $this->Form->end() ?>
         </div>
     </div>
+    <script>
+        console.log(response);
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('form');
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(form);
+        fetch('/pessoas/add', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+      });
+    });
+  </script>
 </div>

@@ -1,11 +1,12 @@
 function listarPessoas() {
     $.ajax({
       type: "GET",
+      dataType: 'json',
       url: "http://localhost:8765/pessoas",
       success: function(response) {
-        // Limpa a tabela
+
         $("#table-pessoas tbody").empty();
-        // Preenche a tabela com as pessoas
+
         console.log(response);
         response.forEach(function(pessoa) {
           var html = "<tr>";
@@ -28,13 +29,13 @@ function listarPessoas() {
     });
   }
 
-  // Função para adicionar uma pessoa
+
   function adicionarPessoa() {
     var pessoa = {
-      nome: $("#nome").val(),
+      nome: $("#nome-completo").val(),
       email: $("#email").val(),
       cpf: $("#cpf").val(),
-      data_nascimento: $("#data_nascimento").val(),
+      data_nascimento: $("#data-nascimento").val(),
       enderecos: [
         {
           cep: $("#cep").val(),
@@ -52,7 +53,7 @@ function listarPessoas() {
       data: pessoa,
       success: function() {
         listarPessoas();
-        // Limpa os campos do formulário
+
         $("#nome").val("");
         $("#email").val("");
         $("#cpf").val("");
@@ -67,7 +68,7 @@ function listarPessoas() {
     });
   }
 
-  // Função para remover uma pessoa
+
   function removerPessoa(id) {
     $.ajax({
       type: "DELETE",
@@ -78,7 +79,7 @@ function listarPessoas() {
     });
   }
 
-  // Ao carregar a página, lista todas as pessoas
+
   $(document).submit(function(e) {
       listarPessoas();
       e.preventDefault()

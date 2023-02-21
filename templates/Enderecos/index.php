@@ -6,9 +6,14 @@
 ?>
 <div class="enderecos index content">
     <?= $this->Html->link(__('New Endereco'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+
     <h3><?= __('Enderecos') ?></h3>
     <div class="table-responsive">
         <table>
+        <div class="side-nav">
+    <h4 class="heading"><?= __('Actions') ?></h4>
+        <?= $this->Html->link(__('List Pessoas'), ['controller' => 'Pessoas', 'action' => 'index'], ['class' => 'side-nav-item']) ?>
+    </div>
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
@@ -34,8 +39,6 @@
                     <td><?= h($endereco->numero) ?></td>
                     <td><?= h($endereco->complemento) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $endereco->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $endereco->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $endereco->id], ['confirm' => __('Are you sure you want to delete # {0}?', $endereco->id)]) ?>
                     </td>
                 </tr>

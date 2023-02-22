@@ -6,8 +6,6 @@ function listarPessoas() {
       success: function(response) {
 
         $("#table-pessoas tbody").empty();
-
-        console.log(response);
         response.forEach(function(pessoa) {
           var html = "<tr>";
           html += "<td>" + pessoa.nome + "</td>";
